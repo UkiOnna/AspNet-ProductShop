@@ -1,0 +1,9 @@
+﻿.block {
+    margin-bottom: 10px;
+    border: 1px solid black;  
+    width:700px;
+    margin:auto;
+}
+.Title{
+    text-align:center;
+}
