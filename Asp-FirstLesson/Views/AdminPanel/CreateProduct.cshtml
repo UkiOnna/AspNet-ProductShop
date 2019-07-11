@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/index.css" rel="stylesheet" />
+    <title>CreateProduct</title>
+</head>
+<body>
+    <div class="Title"><h1>Super-Shop</h1></div>
+    <div>
+        <form action="~/AdminPanel/CreateProduct" method="post">
+            <input placeholder="Введите название" name="Name" />
+            <input placeholder="Введите цену" name="Price" />
+            <input placeholder="Введите описание" name="Description" />
+            <input placeholder="Введите id марки" name="ProducerId" />
+            <input placeholder="Введите id категории" name="CategoryId" />
+            <button type="submit">Создать!</button>
+        </form>
+    </div>
+</body>
+</html>

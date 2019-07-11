@@ -73,3 +73,8 @@ C:\Users\СикировТ\source\repos\Asp-FirstLesson\Asp-FirstLesson\obj\Debug
 C:\Users\СикировТ\source\repos\Asp-FirstLesson\Asp-FirstLesson\obj\Debug\Asp-FirstLesson.csproj.CopyComplete
 C:\Users\СикировТ\source\repos\Asp-FirstLesson\Asp-FirstLesson\obj\Debug\Asp-FirstLesson.dll
 C:\Users\СикировТ\source\repos\Asp-FirstLesson\Asp-FirstLesson\obj\Debug\Asp-FirstLesson.pdb
+C:\Users\СикировТ\source\repos\Asp-FirstLesson\Asp-FirstLesson\bin\EntityFramework.dll
+C:\Users\СикировТ\source\repos\Asp-FirstLesson\Asp-FirstLesson\bin\EntityFramework.SqlServer.dll
+C:\Users\СикировТ\source\repos\Asp-FirstLesson\Asp-FirstLesson\bin\EntityFramework.xml
+C:\Users\СикировТ\source\repos\Asp-FirstLesson\Asp-FirstLesson\bin\EntityFramework.SqlServer.xml
+C:\Users\СикировТ\source\repos\Asp-FirstLesson\Asp-FirstLesson\bin\ru\EntityFramework.resources.dll

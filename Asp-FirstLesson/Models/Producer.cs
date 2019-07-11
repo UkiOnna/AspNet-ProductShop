@@ -7,5 +7,6 @@ namespace Asp_FirstLesson.Models
 {
     public class Producer:Entity
     {
+        public virtual IEnumerable<Product> Products { get; set; }
     }
 }

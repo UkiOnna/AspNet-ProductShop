@@ -11,25 +11,11 @@ namespace Asp_FirstLesson.Controllers
     public class ProductController : Controller
     {
         // GET: Product
-        List<Product> products = new List<Product>();
+        ShopContext db = new ShopContext();
         public ProductController()
         {
-            Product product = new Product();
-            product.Price = 500;
-            product.Id = 1;
-            product.Name = "Шоколадка";
-            Producer producer = new Producer();
-            producer.Name = "Чарли Шоколадная фабрика";
-            product.Producer = producer;
-
-            Product product2 = new Product();
-            product2.Id = 2;
-            product2.Price = 100;
-            product2.Name = "Леденец";
-            producer.Name = "Чарли Шоколадная фабрика";
-            product2.Producer = producer;
-            products.Add(product);
-            products.Add(product2);
+            
+            db.Role.ToList();
         }
         public ViewResult Index()
         {
@@ -40,22 +26,40 @@ namespace Asp_FirstLesson.Controllers
         public ViewResult GetProducts()
         {
 
-            
-            
-            StringBuilder builder = new StringBuilder();
 
-            ViewBag.Products = products;
+
+            ViewBag.Products = db.Product.ToList();
             return View();
             //foreach (var p in products){
             //    builder.Append("Продукт - " + p.Name + " " + "Цена - " + p.Price + " " + "Производитель - " + p.Producer.Name + "<br>");
             //}
             //return builder.ToString();
-           
+
         }
-        public ViewResult GetProduct(int id)
+        public ActionResult GetProduct(int? id)
         {
-            ViewBag.Product = products.SingleOrDefault(p=>p.Id==id);
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(404);
+            }
+            else
+            {
+                Product prod = db.Product.FirstOrDefault(a => a.Id == id);
+                if (prod == null)
+                {
+                    return new HttpStatusCodeResult(404);
+                }
+                else
+                {
+                    ViewBag.Product = db.Product.FirstOrDefault(p => p.Id == id);
+                    return View();
+                }
+            }
+        }
+        public string FillBd()
+        {
+            db.FillBd(db);
+            return "БД успешно заполнена";
         }
     }
 }
