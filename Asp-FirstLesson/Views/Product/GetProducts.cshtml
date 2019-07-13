@@ -15,18 +15,24 @@
     <div class="Title"><h1>Super-Shop</h1></div>
     
     <div>
+        <div class="Center Categories">
+            <a class="Category" href="~/Product/GetProducts/">Все</a>
+            @foreach (var i in ViewBag.Categories)
+            {
+                <a class="Category" href="~/Product/GetProducts/@i.Id">@i.Name</a>
+            }
+        </div>
+
         @foreach (var i in ViewBag.Products)
         {
-        <div class="block">
-
-            <span>Имя:</span><span>@i.Name</span><br />
-            <span>Цена:</span><span>@i.Price</span><br />
-            <span>Производитель:</span><span>@i.Producer.Name</span><br />
-            <a href="~/Product/GetProduct/@i.Id">Просмотр</a>
-
-
-
-        </div>        }
+    <div class="block">
+        <span>Категория:</span><span>@i.Category.Name</span><br />
+        <span>Имя:</span><span>@i.Name</span><br />
+        <span>Цена:</span><span>@i.Price</span><br />
+        <span>Производитель:</span><span>@i.Producer.Name</span><br />
+        <a href="~/Product/GetProduct/@i.Id">Просмотр</a>
+    </div>
+        }
 
     </div>
 </body>

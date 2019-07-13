@@ -22,11 +22,6 @@ namespace Asp_FirstLesson.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult CreateUser()
-        {
-            return View();
-        }
-        [HttpGet]
         public ActionResult CreateRole()
         {
             return View();
@@ -55,13 +50,6 @@ namespace Asp_FirstLesson.Controllers
             {
                 return new HttpStatusCodeResult(404);
             }
-        }
-        [HttpPost]
-        public ActionResult CreateUser(User user)
-        {
-            db.User.Add(user);
-            db.SaveChanges();
-            return new RedirectResult("/Product/GetProducts");
         }
         [HttpPost]
         public ActionResult CreateRole(Role role)

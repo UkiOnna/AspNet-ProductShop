@@ -23,17 +23,15 @@ namespace Asp_FirstLesson.Controllers
             return View();
         }
 
-        public ViewResult GetProducts()
+        public ViewResult GetProducts(int? id)
         {
-
-
-
-            ViewBag.Products = db.Product.ToList();
+            ViewBag.Categories = db.Category.ToList();
+            ViewBag.Products = db.Product.Where(c => c.Id == id);
+            if (id == null)
+            {
+                ViewBag.Products = db.Product.ToList();
+            }
             return View();
-            //foreach (var p in products){
-            //    builder.Append("Продукт - " + p.Name + " " + "Цена - " + p.Price + " " + "Производитель - " + p.Producer.Name + "<br>");
-            //}
-            //return builder.ToString();
 
         }
         public ActionResult GetProduct(int? id)

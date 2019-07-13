@@ -129,6 +129,7 @@
     <Content Include="Views\AdminPanel\CreateCategory.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
+    <Content Include="Views\AdminPanel\CreateRole.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
