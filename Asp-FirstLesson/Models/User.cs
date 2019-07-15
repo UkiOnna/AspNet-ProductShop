@@ -9,9 +9,11 @@ namespace Asp_FirstLesson.Models
 {
     public class User:Entity
     {
-        [Required]
+        [Required(ErrorMessage ="Логин обязательное поле")]
+        [MinLength(3,ErrorMessage ="Логин состоять как минимум из 3 символов")]
         public string Login { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Пароль обязательное поле")]
+        [MinLength(4, ErrorMessage = "Пароль должен состоять как минимум из 4 символов")]
         public string Password { get; set; }
         [ForeignKey("Role")]
         [Required]

@@ -37,6 +37,28 @@ namespace Asp_FirstLesson.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult EditProduct(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(404);
+            }
+            else
+            {
+                Product prod = db.Product.FirstOrDefault(a => a.Id == id);
+                if (prod == null)
+                {
+                    return new HttpStatusCodeResult(404);
+                }
+                else
+                {
+                    ViewBag.Product = db.Product.FirstOrDefault(p => p.Id == id);
+                    return View();
+                }
+            }
+        }
+
         [HttpPost]
         public ActionResult CreateProduct(Product product)
         {
@@ -85,6 +107,26 @@ namespace Asp_FirstLesson.Controllers
             if (ModelState.IsValid)
             {
                 db.Category.Add(category);
+                db.SaveChanges();
+                return new RedirectResult("/Product/GetProducts");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(404);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditProduct(Product product)
+        {
+            Product product1 = db.Product.SingleOrDefault(s => s.Id == product.Id);
+            if (ModelState.IsValid && product1 != null)
+            {
+                product1.Name = product.Name;
+                product1.Price = product.Price;
+                product1.ProducerId = product.ProducerId;
+                product1.CategoryId = product.CategoryId;
+                product1.Category = product.Category;
                 db.SaveChanges();
                 return new RedirectResult("/Product/GetProducts");
             }

@@ -1,9 +1,20 @@
 ﻿.block {
-    margin-bottom: 10px;
-    border: 1px solid black;  
-    width:700px;
-    margin:auto;
+    /*margin-bottom: 10px;*/
+    border: 1px solid black;
+    width: 700px;
+    margin: auto;
+    position: relative;
 }
 .Title{
+    text-align:center;
+}
+.block .stroka {
+    position: absolute;
+    bottom: 0;
+    right: 17px;
+}
+.center{
+    margin:auto;
+    margin-bottom:20px;
     text-align:center;
 }

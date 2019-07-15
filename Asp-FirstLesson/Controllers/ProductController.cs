@@ -26,7 +26,7 @@ namespace Asp_FirstLesson.Controllers
         public ViewResult GetProducts(int? id)
         {
             ViewBag.Categories = db.Category.ToList();
-            ViewBag.Products = db.Product.Where(c => c.Id == id);
+            ViewBag.Products = db.Product.Where(c => c.CategoryId == id);
             if (id == null)
             {
                 ViewBag.Products = db.Product.ToList();

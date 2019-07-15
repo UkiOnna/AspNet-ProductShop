@@ -19,19 +19,23 @@ namespace Asp_FirstLesson.Controllers
         [HttpPost]
         public ActionResult Registration(User user)
         {
-            User user1 = db.User.SingleOrDefault(p => p.Login == user.Login);
-            if (user1 == null && ModelState.IsValid)
-            {
-                user.RoleId = 1;
-                db.User.Add(user);
-                db.SaveChanges();
-                return new RedirectResult("/Home/Index");
-            }
-            else
-            {
-                return new HttpStatusCodeResult(404);
-            }
             
+            if (ModelState.IsValid)
+            {
+                User user1 = db.User.SingleOrDefault(p => p.Login == user.Login);
+                if (user1 == null)
+                {
+                    user.RoleId = 1;
+                    db.User.Add(user);
+                    db.SaveChanges();
+                    return new RedirectResult("/Home/Index");
+                }
+                else
+                {
+                    return new HttpStatusCodeResult(404);
+                }
+            }
+            return View("Registration");
         }
     }
 }
