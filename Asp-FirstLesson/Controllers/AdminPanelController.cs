@@ -54,9 +54,16 @@ namespace Asp_FirstLesson.Controllers
         [HttpPost]
         public ActionResult CreateRole(Role role)
         {
-            db.Role.Add(role);
-            db.SaveChanges();
-            return new RedirectResult("/Product/GetProducts");
+            if (ModelState.IsValid)
+            {
+                db.Role.Add(role);
+                db.SaveChanges();
+                return new RedirectResult("/Product/GetProducts");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(404);
+            }
         }
         [HttpPost]
         public ActionResult CreateProducer(Producer producer)
