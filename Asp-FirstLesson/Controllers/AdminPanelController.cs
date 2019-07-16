@@ -1,4 +1,5 @@
-﻿using Asp_FirstLesson.Models;
+﻿using Asp_FirstLesson.Interfaces;
+using Asp_FirstLesson.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,18 @@ namespace Asp_FirstLesson.Controllers
     public class AdminPanelController : Controller
     {
         // GET: AdminPanel
-        ShopContext db = new ShopContext();
+        private readonly IRepository<Product> ProductRepository;
+        private readonly IRepository<Category> CategoryRepository;
+        private readonly IRepository<Role> RoleRepository;
+        private readonly IRepository<Producer> ProducerRepository;
+
+        public AdminPanelController(IRepository<Product> repository, IRepository<Category> CategoryRepository, IRepository<Role> RoleRepository, IRepository<Producer> ProducerRepository)
+        {
+            this.ProductRepository = repository;
+            this.CategoryRepository = CategoryRepository;
+            this.RoleRepository = RoleRepository;
+            this.ProductRepository = ProductRepository;
+        }
         public ActionResult Index()
         {
             ViewBag.Title = "MY-SHOP.ORG";

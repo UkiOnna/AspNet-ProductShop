@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Asp_FirstLesson.App_Start;
+using Ninject;
+using Ninject.Web.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +16,10 @@ namespace Asp_FirstLesson
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            var registrator = new NinjectRegistrator();
+            var kernel = new StandardKernel(registrator);
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
     }
 }

@@ -17,9 +17,12 @@
         <form action="~/User/Registration" method="post">
             <input placeholder="Введите логин" name="Login" />
             @Html.ValidationMessageFor(model => model.Login)
+            <br />
             <input type="password" placeholder="Введите пароль" name="Password" />
             @Html.ValidationMessageFor(model => model.Password)
+            <br />
             <input placeholder="Введите имя" name="Name" />
+            <br />
             <button type="submit">Регистрация</button>
         </form>
     </div>

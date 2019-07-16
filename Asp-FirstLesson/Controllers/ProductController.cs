@@ -1,4 +1,6 @@
-﻿using Asp_FirstLesson.Models;
+﻿using Asp_FirstLesson.Data;
+using Asp_FirstLesson.Interfaces;
+using Asp_FirstLesson.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +12,19 @@ namespace Asp_FirstLesson.Controllers
 {
     public class ProductController : Controller
     {
+        private readonly IRepository<Product> ProductRepository;
+        private readonly IRepository<Category> CategoryRepository;
+
         // GET: Product
-        ShopContext db = new ShopContext();
-        public ProductController()
+        //ShopContext db = new ShopContext();
+
+
+        public ProductController(IRepository<Product> repository,IRepository<Category> CategoryRepository)
         {
-            
-            db.Role.ToList();
+            ProductRepository = repository;
+            this.CategoryRepository = CategoryRepository;
         }
+
         public ViewResult Index()
         {
             ViewBag.Title = "MY-SHOP.ORG";
@@ -25,11 +33,12 @@ namespace Asp_FirstLesson.Controllers
 
         public ViewResult GetProducts(int? id)
         {
-            ViewBag.Categories = db.Category.ToList();
-            ViewBag.Products = db.Product.Where(c => c.CategoryId == id);
+
+            ViewBag.Categories = CategoryRepository.GetAll().ToList();
+            ViewBag.Products = ProductRepository.GetAll().Where(c => c.CategoryId == id);
             if (id == null)
             {
-                ViewBag.Products = db.Product.ToList();
+                ViewBag.Products =ProductRepository.GetAll().ToList();
             }
             return View();
 
@@ -42,22 +51,17 @@ namespace Asp_FirstLesson.Controllers
             }
             else
             {
-                Product prod = db.Product.FirstOrDefault(a => a.Id == id);
+                Product prod = ProductRepository.GetAll().FirstOrDefault(a => a.Id == id);
                 if (prod == null)
                 {
                     return new HttpStatusCodeResult(404);
                 }
                 else
                 {
-                    ViewBag.Product = db.Product.FirstOrDefault(p => p.Id == id);
+                    ViewBag.Product = ProductRepository.GetAll().FirstOrDefault(p => p.Id == id);
                     return View();
                 }
             }
-        }
-        public string FillBd()
-        {
-            db.FillBd(db);
-            return "БД успешно заполнена";
         }
     }
 }
