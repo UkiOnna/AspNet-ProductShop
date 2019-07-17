@@ -30,7 +30,6 @@ namespace Asp_FirstLesson.Controllers
                 User user1 = UserRepository.GetAll().SingleOrDefault(p => p.Login == user.Login);
                 if (user1 == null)
                 {
-                    user.RoleId = 1;
                     UserRepository.Add(user);
                     return new RedirectResult("/Home/Index");
                 }

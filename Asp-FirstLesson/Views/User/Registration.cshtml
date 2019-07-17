@@ -22,6 +22,7 @@
             @Html.ValidationMessageFor(model => model.Password)
             <br />
             <input placeholder="Введите имя" name="Name" />
+            <input hidden type="Number" name="RoleId" value="1" placeholder="Введите id роли" /><br />
             <br />
             <button type="submit">Регистрация</button>
         </form>

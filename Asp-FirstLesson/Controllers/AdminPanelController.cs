@@ -21,7 +21,7 @@ namespace Asp_FirstLesson.Controllers
             this.ProductRepository = repository;
             this.CategoryRepository = CategoryRepository;
             this.RoleRepository = RoleRepository;
-            this.ProductRepository = ProductRepository;
+            this.ProducerRepository = ProducerRepository;
         }
         public ActionResult Index()
         {
@@ -58,14 +58,14 @@ namespace Asp_FirstLesson.Controllers
             }
             else
             {
-                Product prod = db.Product.FirstOrDefault(a => a.Id == id);
+                Product prod = ProductRepository.GetAll().FirstOrDefault(a => a.Id == id);
                 if (prod == null)
                 {
                     return new HttpStatusCodeResult(404);
                 }
                 else
                 {
-                    ViewBag.Product = db.Product.FirstOrDefault(p => p.Id == id);
+                    ViewBag.Product = ProductRepository.GetAll().FirstOrDefault(p => p.Id == id);
                     return View();
                 }
             }
@@ -76,8 +76,7 @@ namespace Asp_FirstLesson.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Product.Add(product);
-                db.SaveChanges();
+                ProductRepository.Add(product);
                 return new RedirectResult("/Product/GetProducts");
             }
             else
@@ -90,8 +89,7 @@ namespace Asp_FirstLesson.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Role.Add(role);
-                db.SaveChanges();
+                RoleRepository.Add(role);
                 return new RedirectResult("/Product/GetProducts");
             }
             else
@@ -104,8 +102,7 @@ namespace Asp_FirstLesson.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Producer.Add(producer);
-                db.SaveChanges();
+                ProducerRepository.Add(producer);
                 return new RedirectResult("/Product/GetProducts");
             }
             else
@@ -118,8 +115,7 @@ namespace Asp_FirstLesson.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Category.Add(category);
-                db.SaveChanges();
+                CategoryRepository.Add(category);
                 return new RedirectResult("/Product/GetProducts");
             }
             else
@@ -131,23 +127,8 @@ namespace Asp_FirstLesson.Controllers
         [HttpPost]
         public ActionResult EditProduct(Product product)
         {
-            Product product1 = db.Product.SingleOrDefault(s => s.Id == product.Id);
-            if (ModelState.IsValid && product1 != null)
-            {
-                product1.Name = product.Name;
-                product1.Price = product.Price;
-                product1.ProducerId = product.ProducerId;
-                product1.CategoryId = product.CategoryId;
-                product1.Category = product.Category;
-                db.SaveChanges();
-                return new RedirectResult("/Product/GetProducts");
-            }
-            else
-            {
-                return new HttpStatusCodeResult(404);
-            }
+            ProductRepository.Edit(product);
+            return new RedirectResult("/Product/GetProducts");
         }
-
-
     }
 }
