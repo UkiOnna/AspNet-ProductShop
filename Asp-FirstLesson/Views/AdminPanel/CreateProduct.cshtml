@@ -16,8 +16,20 @@
             <input placeholder="Введите название" name="Name" />
             <input placeholder="Введите цену" name="Price" />
             <input placeholder="Введите описание" name="Description" />
-            <input placeholder="Введите id марки" name="ProducerId" />
-            <input placeholder="Введите id категории" name="CategoryId" />
+            <span>Выберите производителя:</span>
+            <select name="ProducerId">
+                @foreach (var i in ViewBag.Producers)
+                {
+                    <option value="@i.Id">@i.Name</option>
+                }
+            </select>
+            <span>Выберите категорию:</span>
+            <select name="CategoryId">
+                @foreach (var i in ViewBag.Categories)
+                {
+                    <option value="@i.Id">@i.Name</option>
+                }
+            </select>
             <button type="submit">Создать!</button>
         </form>
     </div>

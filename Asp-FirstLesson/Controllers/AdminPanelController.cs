@@ -31,6 +31,8 @@ namespace Asp_FirstLesson.Controllers
         [HttpGet]
         public ActionResult CreateProduct()
         {
+            ViewBag.Categories = CategoryRepository.GetAll().ToList();
+            ViewBag.Producers = ProducerRepository.GetAll().ToList();
             return View();
         }
         [HttpGet]
@@ -66,6 +68,8 @@ namespace Asp_FirstLesson.Controllers
                 else
                 {
                     ViewBag.Product = ProductRepository.GetAll().FirstOrDefault(p => p.Id == id);
+                    ViewBag.Categories = CategoryRepository.GetAll().ToList();
+                    ViewBag.Producers = ProducerRepository.GetAll().ToList();
                     return View();
                 }
             }

@@ -1,5 +1,6 @@
 ﻿using Asp_FirstLesson.Interfaces;
 using Asp_FirstLesson.Models;
+using Asp_FirstLesson.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,15 +23,16 @@ namespace Asp_FirstLesson.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Registration(User user)
+        public ActionResult Registration(UserViewModel user)
         {
             
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && user.Password == user.SecondPassword)
             {
                 User user1 = UserRepository.GetAll().SingleOrDefault(p => p.Login == user.Login);
                 if (user1 == null)
                 {
-                    UserRepository.Add(user);
+                    User user2 = user.GetUser();
+                    UserRepository.Add(user2);
                     return new RedirectResult("/Home/Index");
                 }
                 else

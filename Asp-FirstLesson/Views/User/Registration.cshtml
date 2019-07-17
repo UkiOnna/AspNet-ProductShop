@@ -19,9 +19,13 @@
             @Html.ValidationMessageFor(model => model.Login)
             <br />
             <input type="password" placeholder="Введите пароль" name="Password" />
+            <br />
+            <input type="password" name="SecondPassword" value="" placeholder="Повторите пароль" /><br />
             @Html.ValidationMessageFor(model => model.Password)
             <br />
             <input placeholder="Введите имя" name="Name" />
+            @Html.ValidationMessageFor(model => model.Name)
+            <br />
             <input hidden type="Number" name="RoleId" value="1" placeholder="Введите id роли" /><br />
             <br />
             <button type="submit">Регистрация</button>
