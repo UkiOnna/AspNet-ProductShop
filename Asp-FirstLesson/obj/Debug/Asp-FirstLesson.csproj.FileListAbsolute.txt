@@ -342,3 +342,5 @@ C:\Users\СикировТ\Desktop\ASPSHOP\Asp-FirstLesson\obj\Debug\Asp-FirstLes
 C:\Users\СикировТ\Desktop\ASPSHOP\Asp-FirstLesson\obj\Debug\Asp-FirstLesson.csproj.CopyComplete
 C:\Users\СикировТ\Desktop\ASPSHOP\Asp-FirstLesson\obj\Debug\Asp-FirstLesson.dll
 C:\Users\СикировТ\Desktop\ASPSHOP\Asp-FirstLesson\obj\Debug\Asp-FirstLesson.pdb
+C:\Users\СикировТ\Desktop\ASPSHOP\Asp-FirstLesson\bin\Newtonsoft.Json.dll
+C:\Users\СикировТ\Desktop\ASPSHOP\Asp-FirstLesson\bin\Newtonsoft.Json.xml

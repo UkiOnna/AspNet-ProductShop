@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EditProducer</title>
+</head>
+<body>
+    <div>
+        @foreach (var i in ViewBag.Producers)
+        {
+
+            <div class="block">
+                <span>Имя:</span><span>@i.Name</span><br />
+                <a href="~/AdminPanel/EditProducer/@i.Id">Редактировать</a>
+            </div>
+        }
+
+    </div>
+</body>
+</html>

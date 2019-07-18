@@ -1,0 +1,14 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<form action="~/AdminPanel/EditCategory" method="post">
+    <input value="@ViewBag.Category.Name" placeholder="Название" name="Name" />
+    <input hidden type="Number" name="Id" value="@ViewBag.Category.Id" />
+    <button type="submit">Редактировать!</button>
+</form>

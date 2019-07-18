@@ -18,16 +18,24 @@
             <input value="@ViewBag.Product.Description" placeholder="Описание" name="Description" />
             <span>Производитель:</span>
             <select name="ProducerId">
+                <option selected="selected" value="@ViewBag.Product.ProducerId">@ViewBag.Product.Producer.Name</option>
                 @foreach (var i in ViewBag.Producers)
                 {
+                    if (i.Id != ViewBag.Product.ProducerId)
+                    {
                     <option value="@i.Id">@i.Name</option>
-                }
+                        }
+                    }
             </select>
             <span>Категория:</span>
             <select name="CategoryId">
+                <option selected="selected" value="@ViewBag.Product.CategoryId">@ViewBag.Product.Category.Name</option>
                 @foreach (var i in ViewBag.Categories)
                 {
+                    if (i.Id != ViewBag.Product.CategoryId)
+                    {
                     <option value="@i.Id">@i.Name</option>
+                    }
                 }
             </select>
             <input hidden type="Number" name="Id" value="@ViewBag.Product.Id" />
