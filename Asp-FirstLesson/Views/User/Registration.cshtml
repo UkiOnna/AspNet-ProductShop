@@ -1,5 +1,5 @@
 ﻿@using Asp_FirstLesson.Models
-@model User
+@model Asp_FirstLesson.ViewModels.UserViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,29 +7,26 @@
 
 <!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Registration</title>
-</head>
-<body>
-    <div>
-        <form action="~/User/Registration" method="post">
-            <input placeholder="Введите логин" name="Login" />
-            @Html.ValidationMessageFor(model => model.Login)
-            <br />
-            <input type="password" placeholder="Введите пароль" name="Password" />
-            <br />
-            <input type="password" name="SecondPassword" value="" placeholder="Повторите пароль" /><br />
-            @Html.ValidationMessageFor(model => model.Password)
-            <br />
-            <input placeholder="Введите имя" name="Name" />
-            @Html.ValidationMessageFor(model => model.Name)
-            <br />
-            <input hidden type="Number" name="RoleId" value="1" placeholder="Введите id роли" /><br />
-            <br />
-            <button type="submit">Регистрация</button>
-        </form>
+<form method="post" action="/User/Registration">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Login</label>
+        <input name="Login" class="form-control" placeholder="Login">
+        @Html.ValidationMessageFor(model => model.Login)
     </div>
-</body>
-</html>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input name="Email" class="form-control" placeholder="E-mail">
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input name="Password" class="form-control" type="password" placeholder="Password">
+        @Html.ValidationMessageFor(model => model.Password)
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Confirm Password</label>
+        <input name="SecondPassword" class="form-control" type="password" placeholder="Password">
+        @Html.ValidationMessageFor(model => model.SecondPassword)
+    </div>
+    <button type="submit" class="btn btn-primary">Registration</button>
+</form>

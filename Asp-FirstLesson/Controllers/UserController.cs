@@ -1,9 +1,14 @@
 ﻿using Asp_FirstLesson.Interfaces;
 using Asp_FirstLesson.Models;
 using Asp_FirstLesson.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,35 +17,78 @@ namespace Asp_FirstLesson.Controllers
     public class UserController : Controller
     {
         // GET: User
-        private readonly IRepository<User> UserRepository;
-        public UserController(IRepository<User> repository)
+        private AppUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
+
+        [HttpPost]
+        public async Task<ActionResult> Login(LoginViewModel loginModel)
         {
-            UserRepository = repository;
+            if (ModelState.IsValid)
+            {
+                var user = UserManager.Users.FirstOrDefault(u => u.UserName == loginModel.Username);
+                if (user == null)
+                {
+                    return new RedirectResult("/User/Registration");
+                }
+
+                ClaimsIdentity claim = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+                AuthenticationManager.SignOut();
+                AuthenticationManager.SignIn(new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                }, claim);
+
+                return new RedirectResult("/Home/Index");
+            }
+            else
+            {
+                return View(loginModel);
+            }
         }
+
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult LogOut()
+        {
+            if (User.Identity != null)
+            {
+                AuthenticationManager.SignOut();
+            }
+            return new RedirectResult("/Home/Index");
+        }
+
+
         [HttpGet]
         public ActionResult Registration()
         {
             return View();
         }
+
         [HttpPost]
-        public ActionResult Registration(UserViewModel user)
+        public async Task<ActionResult> Registration(UserViewModel model)
         {
-            
-            if (ModelState.IsValid && user.Password == user.SecondPassword)
+            if (ModelState.IsValid)
             {
-                User user1 = UserRepository.GetAll().SingleOrDefault(p => p.Login == user.Login);
-                if (user1 == null)
+                var user = new User { UserName = model.Login, Email = model.Email,RoleId=1};
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
                 {
-                    User user2 = user.GetUser();
-                    UserRepository.Add(user2);
                     return new RedirectResult("/Home/Index");
                 }
                 else
                 {
-                    return new HttpStatusCodeResult(404);
+                    return View(model);
                 }
+
             }
-            return View("Registration");
+
+            return View(model);
         }
     }
 }

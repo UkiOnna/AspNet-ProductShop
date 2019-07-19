@@ -141,27 +141,6 @@ namespace Asp_FirstLesson.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult EditUser(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(404);
-            }
-            else
-            {
-                User prod = UserRepository.GetAll().FirstOrDefault(a => a.Id == id);
-                if (prod == null)
-                {
-                    return new HttpStatusCodeResult(404);
-                }
-                else
-                {
-                    ViewBag.User = prod;
-                    return View();
-                }
-            }
-        }
 
         [HttpPost]
         public ActionResult CreateProduct(Product product)
