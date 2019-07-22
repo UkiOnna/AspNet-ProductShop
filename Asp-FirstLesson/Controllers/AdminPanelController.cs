@@ -1,5 +1,7 @@
 ﻿using Asp_FirstLesson.Interfaces;
 using Asp_FirstLesson.Models;
+using Asp_FirstLesson.ViewModels;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,17 +15,16 @@ namespace Asp_FirstLesson.Controllers
         // GET: AdminPanel
         private readonly IRepository<Product> ProductRepository;
         private readonly IRepository<Category> CategoryRepository;
-        private readonly IRepository<Role> RoleRepository;
         private readonly IRepository<Producer> ProducerRepository;
-        private readonly IRepository<User> UserRepository;
+        private AppUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+        private AppRoleManager RolesManager => HttpContext.GetOwinContext().GetUserManager<AppRoleManager>();
 
-        public AdminPanelController(IRepository<Product> repository, IRepository<Category> CategoryRepository, IRepository<Role> RoleRepository, IRepository<Producer> ProducerRepository, IRepository<User> UserRepository)
+        public AdminPanelController(IRepository<Product> repository, IRepository<Category> CategoryRepository, IRepository<Producer> ProducerRepository)
         {
             this.ProductRepository = repository;
             this.CategoryRepository = CategoryRepository;
-            this.RoleRepository = RoleRepository;
             this.ProducerRepository = ProducerRepository;
-            this.UserRepository = UserRepository;
+
         }
         public ActionResult Index()
         {
@@ -36,11 +37,7 @@ namespace Asp_FirstLesson.Controllers
             ViewBag.Producers = ProducerRepository.GetAll().ToList();
             return View();
         }
-        [HttpGet]
-        public ActionResult CreateRole()
-        {
-            return View();
-        }
+
         [HttpGet]
         public ActionResult CreateProducer()
         {
@@ -51,6 +48,7 @@ namespace Asp_FirstLesson.Controllers
         {
             return View();
         }
+
 
         [HttpGet]
         public ActionResult EditProduct(int? id)
@@ -93,7 +91,7 @@ namespace Asp_FirstLesson.Controllers
         [HttpGet]
         public ActionResult EditUsers()
         {
-            ViewBag.Users = UserRepository.GetAll().ToList();
+            ViewBag.Users = UserManager.Users.ToList();
             return View();
         }
 
@@ -155,19 +153,7 @@ namespace Asp_FirstLesson.Controllers
                 return new HttpStatusCodeResult(404);
             }
         }
-        [HttpPost]
-        public ActionResult CreateRole(Role role)
-        {
-            if (ModelState.IsValid)
-            {
-                RoleRepository.Add(role);
-                return new RedirectResult("/Product/GetProducts");
-            }
-            else
-            {
-                return new HttpStatusCodeResult(404);
-            }
-        }
+
         [HttpPost]
         public ActionResult CreateProducer(Producer producer)
         {
@@ -195,6 +181,7 @@ namespace Asp_FirstLesson.Controllers
             }
         }
 
+
         [HttpPost]
         public ActionResult EditProduct(Product product)
         {
@@ -217,9 +204,8 @@ namespace Asp_FirstLesson.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditUser(User product)
+        public ActionResult EditUser(EditUserViewModel product)
         {
-            UserRepository.Edit(product);
             return new RedirectResult("/AdminPanel/EditProducers");
         }
     }

@@ -10,9 +10,6 @@ namespace Asp_FirstLesson.Models
 {
     public class User:IdentityUser
     {
-        [ForeignKey("Role")]
-        [Range(1, int.MaxValue)]
-        public int RoleId { get; set; }
-        public virtual Role Role { get; set; }
+
     }
 }

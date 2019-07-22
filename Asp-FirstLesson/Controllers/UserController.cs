@@ -2,6 +2,7 @@
 using Asp_FirstLesson.Models;
 using Asp_FirstLesson.ViewModels;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
@@ -19,6 +20,7 @@ namespace Asp_FirstLesson.Controllers
         // GET: User
         private AppUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
+        private AppRoleManager RolesManager => HttpContext.GetOwinContext().GetUserManager<AppRoleManager>();
 
         [HttpPost]
         public async Task<ActionResult> Login(LoginViewModel loginModel)
@@ -75,10 +77,11 @@ namespace Asp_FirstLesson.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Login, Email = model.Email,RoleId=1};
+                var user = new User { UserName = model.Login, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, "user");
                     return new RedirectResult("/Home/Index");
                 }
                 else

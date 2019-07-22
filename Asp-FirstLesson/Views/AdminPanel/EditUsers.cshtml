@@ -1,0 +1,16 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var i in ViewBag.Users)
+{
+    <div class="block">
+        <span>Логин:</span><span>@i.Login</span><br />
+        <span>Пароль:</span><span>@i.Password</span><br />
+        <span>Роль:</span><span>@i.Price</span><br />
+        <span>Мэйл:</span><span>@i.Email</span><br />
+        <a href="~/AdminPanel/EditProduct/@i.Id">Редактировать</a>
+    </div>
+}
+

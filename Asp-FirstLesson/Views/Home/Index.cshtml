@@ -1,4 +1,4 @@
-﻿
+﻿@using Microsoft.AspNet.Identity;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -12,11 +12,12 @@
 </head>
 <body>
     <div>
+
         <a href="~/Product/GetProducts">Все продукты</a>
-        <a href="~/AdminPanel/CreateProduct">Добавить продукт</a>
-        <a href="~/AdminPanel/CreateCategory">Добавить категорию</a>
-        <a href="~/AdminPanel/CreateProducer">Добавить производителя</a>
-        <a href="~/AdminPanel/CreateRole">Добавить роль</a>
+        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+        {
+            <a href="~/AdminPanel/Index">Админ панель</a>
+        }
     </div>
 </body>
 </html>

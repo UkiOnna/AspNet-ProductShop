@@ -30,8 +30,11 @@
         <span>Цена:</span><span>@i.Price</span><br />
         <span>Производитель:</span><span>@i.Producer.Name</span><br />
         <a href="~/Product/GetProduct/@i.Id"><span class="stroka">Просмотр</span></a>
-        <a href="~/AdminPanel/EditProduct/@i.Id">Редактировать</a>
-    </div>
+        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+        {
+            <a href="~/AdminPanel/EditProduct/@i.Id">Редактировать</a>
+        }
+        </div>
         }
 
     </div>

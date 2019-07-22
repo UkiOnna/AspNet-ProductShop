@@ -17,6 +17,7 @@ namespace Asp_FirstLesson.App_Start
         {
             builder.CreatePerOwinContext(()=>new ShopContext());
             builder.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
+            builder.CreatePerOwinContext<AppRoleManager>(AppRoleManager.Create);
             builder.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,

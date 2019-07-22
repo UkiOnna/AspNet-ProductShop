@@ -1,5 +1,4 @@
-﻿using Asp_FirstLesson.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Web;
 
 namespace Asp_FirstLesson.ViewModels
 {
-    public class UserViewModel
+    public class EditUserViewModel
     {
         [Required(ErrorMessage = "Логин обязательное поле")]
         [MinLength(3, ErrorMessage = "Логин состоять как минимум из 3 символов")]
@@ -18,6 +17,7 @@ namespace Asp_FirstLesson.ViewModels
         public string Password { get; set; }
         [Required(ErrorMessage = "Обязательное поле")]
         public string Email { get; set; }
-        public string SecondPassword { get; set; }
+        public string RoleId { get; set; }
+
     }
 }
