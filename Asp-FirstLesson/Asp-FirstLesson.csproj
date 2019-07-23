@@ -194,6 +194,7 @@
     <Content Include="Views\AdminPanel\EditCategory.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\AdminPanel\EditUsers.cshtml" />
+    <Content Include="Views\AdminPanel\EditUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

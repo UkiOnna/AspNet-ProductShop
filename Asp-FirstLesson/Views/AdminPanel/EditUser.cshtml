@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework;
+@using Microsoft.AspNet.Identity;
+@using System.Linq;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <form action="~/AdminPanel/EditUser" method="post">
+        <input value="@ViewBag.User.UserName" placeholder="Название" name="UserName" />
+        <input value="@ViewBag.User.Email" placeholder="Почта" name="Email" />
+        <span>РОль:</span>
+        
+        <input hidden name="Id" value="@ViewBag.User.Id" />
+        <button type="submit">Редактировать!</button>
+    </form>
+    <form action="/" method="post">
+        <select name="@((ViewBag.User.Roles as IEnumerable<IdentityUserRole>).FirstOrDefault().RoleId)">
+            @foreach (var role in ViewBag.Roles)
+            {
+                if ((ViewBag.User.Roles as IEnumerable<IdentityUserRole>).FirstOrDefault().RoleId == role.Id)
+                {
+                    <option selected="selected" value="@role.Id">@role.Name</option>
+                }
+                else
+                {
+                    <option value="@role.Id">@role.Name</option>
+                }
+
+            }
+
+        </select>
+    </form>

@@ -18,7 +18,6 @@ namespace Asp_FirstLesson.Data
             roleManager.Create(new IdentityRole("admin"));
             var userManager = new AppUserManager(new UserStore<User>(db));
             var user = new User { UserName = "UkiOnna", Email = "lol@mail.ru" };
-            
             var result = userManager.Create(user,"qwerty-123");
             userManager.AddToRole(user.Id, "admin");
             var user1 = new User { UserName = "Star", Email = "lox@mail.ru" };

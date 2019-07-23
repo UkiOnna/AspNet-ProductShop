@@ -1,6 +1,7 @@
 ﻿using Asp_FirstLesson.Interfaces;
 using Asp_FirstLesson.Models;
 using Asp_FirstLesson.ViewModels;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
@@ -92,6 +93,7 @@ namespace Asp_FirstLesson.Controllers
         public ActionResult EditUsers()
         {
             ViewBag.Users = UserManager.Users.ToList();
+            ViewBag.Roles = RolesManager.Roles.ToList();
             return View();
         }
 
@@ -134,6 +136,29 @@ namespace Asp_FirstLesson.Controllers
                 else
                 {
                     ViewBag.Producer = prod;
+                    return View();
+                }
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditUser(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return new HttpStatusCodeResult(404);
+            }
+            else
+            {
+                User user = UserManager.Users.FirstOrDefault(a => a.Id == id);
+                if (user == null)
+                {
+                    return new HttpStatusCodeResult(404);
+                }
+                else
+                {
+                    ViewBag.Roles = RolesManager.Roles.ToList();
+                    ViewBag.User = user;
                     return View();
                 }
             }
@@ -204,9 +229,21 @@ namespace Asp_FirstLesson.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditUser(EditUserViewModel product)
+        public ActionResult EditUser(User user)
         {
-            return new RedirectResult("/AdminPanel/EditProducers");
+            if (ModelState.IsValid)
+            {
+                var roles = UserManager.GetRoles(user.Id);
+                UserManager.RemoveFromRole(user.Id, roles.First());
+                UserManager.AddToRole(user.Id, RolesManager.FindById(user.RoleId.ToString()).Name);
+                UserManager.Update(user);
+                return new RedirectResult("/AdminPanel/EditProducers");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(404);
+            }
+           
         }
     }
 }

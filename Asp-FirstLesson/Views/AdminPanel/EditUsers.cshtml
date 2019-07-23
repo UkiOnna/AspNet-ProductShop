@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.AspNet.Identity.EntityFramework;
+@using Microsoft.AspNet.Identity;
+@using System.Linq;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -6,11 +8,18 @@
 @foreach (var i in ViewBag.Users)
 {
     <div class="block">
-        <span>Логин:</span><span>@i.Login</span><br />
-        <span>Пароль:</span><span>@i.Password</span><br />
-        <span>Роль:</span><span>@i.Price</span><br />
+
+        <span>Логин:</span><span>@i.UserName</span><br />
+        <span>Роль:</span>
+        @foreach (var role in ViewBag.Roles)
+        {
+            if ((i.Roles as IEnumerable<IdentityUserRole>).FirstOrDefault().RoleId == role.Id)
+            {
+                <span>@role.Name</span><br />
+            }
+        }
         <span>Мэйл:</span><span>@i.Email</span><br />
-        <a href="~/AdminPanel/EditProduct/@i.Id">Редактировать</a>
+        <a href="~/AdminPanel/EditUser/@i.Id">Редактировать</a>
     </div>
 }
 
