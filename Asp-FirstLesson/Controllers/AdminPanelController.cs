@@ -144,24 +144,13 @@ namespace Asp_FirstLesson.Controllers
         [HttpGet]
         public ActionResult EditUser(string id)
         {
-            if (string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(id))
             {
-                return new HttpStatusCodeResult(404);
+                ViewBag.Roles = RolesManager.Roles.ToList();
+                var user = new EditUserViewModel(UserManager.Users.FirstOrDefault(u => u.Id == id));
+                return View(user);
             }
-            else
-            {
-                User user = UserManager.Users.FirstOrDefault(a => a.Id == id);
-                if (user == null)
-                {
-                    return new HttpStatusCodeResult(404);
-                }
-                else
-                {
-                    ViewBag.Roles = RolesManager.Roles.ToList();
-                    ViewBag.User = user;
-                    return View();
-                }
-            }
+            return new HttpStatusCodeResult(404);
         }
 
 
@@ -229,21 +218,24 @@ namespace Asp_FirstLesson.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditUser(User user)
+        public ActionResult EditUser(EditUserViewModel user)
         {
             if (ModelState.IsValid)
             {
-                var roles = UserManager.GetRoles(user.Id);
-                UserManager.RemoveFromRole(user.Id, roles.First());
-                UserManager.AddToRole(user.Id, RolesManager.FindById(user.RoleId.ToString()).Name);
-                UserManager.Update(user);
-                return new RedirectResult("/AdminPanel/EditProducers");
+                var updateUser = UserManager.Users.FirstOrDefault(p => p.Id == user.Id);
+                updateUser.UserName = user.UserName;
+                updateUser.Email = user.Email;
+                var roles = UserManager.GetRoles(updateUser.Id);
+                UserManager.RemoveFromRole(updateUser.Id, roles.First());
+                UserManager.AddToRole(updateUser.Id, RolesManager.FindById(user.RoleId.ToString()).Name);
+                UserManager.Update(updateUser);
+                return new RedirectResult("~/AdminPanel/EditUsers");
             }
             else
             {
                 return new HttpStatusCodeResult(404);
             }
-           
+
         }
     }
 }
