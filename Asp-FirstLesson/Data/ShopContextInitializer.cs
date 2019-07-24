@@ -16,11 +16,15 @@ namespace Asp_FirstLesson.Data
             var roleManager = new AppRoleManager(store);
             roleManager.Create(new IdentityRole("user"));
             roleManager.Create(new IdentityRole("admin"));
+            Basket basket = new Basket();
+            Basket basket1 = new Basket();
+            db.Basket.Add(basket);
+            db.Basket.Add(basket1);
             var userManager = new AppUserManager(new UserStore<User>(db));
-            var user = new User { UserName = "UkiOnna", Email = "lol@mail.ru" };
+            var user = new User { UserName = "UkiOnna", Email = "lol@mail.ru",Wallet=10000000,BasketId=1 };
             var result = userManager.Create(user,"qwerty-123");
             userManager.AddToRole(user.Id, "admin");
-            var user1 = new User { UserName = "Star", Email = "lox@mail.ru" };
+            var user1 = new User { UserName = "Star", Email = "lox@mail.ru",BasketId=2 };
             var result1 = userManager.Create(user1, "qwerty-123");
             userManager.AddToRole(user1.Id, "user");
             Producer producer = new Producer { Name = "Сладкая сказка" };

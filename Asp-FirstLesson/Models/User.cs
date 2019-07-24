@@ -10,6 +10,9 @@ namespace Asp_FirstLesson.Models
 {
     public class User:IdentityUser
     {
-
+        [Required]
+        public double Wallet { get; set; }
+        public int BasketId { get; set; }
+        public DateTime BirthDate { get; set; }//ПОДСТАВА
     }
 }

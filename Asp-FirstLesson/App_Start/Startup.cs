@@ -21,7 +21,7 @@ namespace Asp_FirstLesson.App_Start
             builder.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login"),
+                LoginPath = new PathString("/Home/Index"),
             });
         }
     }

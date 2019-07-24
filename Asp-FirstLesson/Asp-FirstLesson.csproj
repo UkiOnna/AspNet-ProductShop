@@ -148,6 +148,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Attributes\NotAuthorize.cs" />
     <Compile Include="Controllers\AdminPanelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -162,8 +163,10 @@
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Models\AppRoleManager.cs" />
     <Compile Include="Models\AppUserManager.cs" />
+    <Compile Include="Models\Basket.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Entity.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Producer.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\User.cs" />
@@ -195,6 +198,7 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\AdminPanel\EditUsers.cshtml" />
     <Content Include="Views\AdminPanel\EditUser.cshtml" />
+    <Content Include="Views\User\GetInformation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

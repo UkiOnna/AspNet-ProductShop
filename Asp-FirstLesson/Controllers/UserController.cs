@@ -1,4 +1,5 @@
-﻿using Asp_FirstLesson.Interfaces;
+﻿using Asp_FirstLesson.Attributes;
+using Asp_FirstLesson.Interfaces;
 using Asp_FirstLesson.Models;
 using Asp_FirstLesson.ViewModels;
 using Microsoft.AspNet.Identity;
@@ -50,6 +51,7 @@ namespace Asp_FirstLesson.Controllers
 
 
         [HttpGet]
+        [NotAuthorize]
         public ActionResult Login()
         {
             return View();
@@ -92,6 +94,15 @@ namespace Asp_FirstLesson.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult GetInformation()
+        {
+            ViewBag.User = UserManager.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
+            var roles = UserManager.GetRoles(User.Identity.GetUserId());
+            ViewBag.Role = roles.First();
+            return View();
         }
     }
 }
