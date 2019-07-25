@@ -50,6 +50,7 @@ namespace Asp_FirstLesson.Controllers
         }
 
 
+        //[Route("123/1234/{returnUri}")]
         [HttpGet]
         [NotAuthorize]
         public ActionResult Login()
@@ -79,7 +80,7 @@ namespace Asp_FirstLesson.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Login, Email = model.Email };
+                var user = new User { UserName = model.Login, Email = model.Email,BirthDate=model.BirthDate,Country=model.Country };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -12,7 +12,11 @@ namespace Asp_FirstLesson.Models
     {
         [Required]
         public double Wallet { get; set; }
+        [Required]
         public int BasketId { get; set; }
+        [Required]
         public DateTime BirthDate { get; set; }//ПОДСТАВА
+        [Required]
+        public string Country { get; set; }
     }
 }

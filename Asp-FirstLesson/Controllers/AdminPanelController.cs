@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Asp_FirstLesson.Controllers
 {
+    [Authorize]
     public class AdminPanelController : Controller
     {
         // GET: AdminPanel

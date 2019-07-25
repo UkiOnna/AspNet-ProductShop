@@ -9,12 +9,7 @@ namespace Asp_FirstLesson.Data
 {
     public class ProductRepository : IRepository<Product>
     {
-        ShopContext db;
-
-        public ProductRepository(ShopContext db)
-        {
-            this.db = db;
-        }
+        ShopContext db=new ShopContext();
         public void Add(Product item)
         {
             db.Product.Add(item);

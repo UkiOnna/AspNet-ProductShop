@@ -575,3 +575,9 @@ C:\Users\СикировТ\Desktop\AspNet-ProductShop\Asp-FirstLesson\obj\Debug\A
 C:\Users\СикировТ\Desktop\AspNet-ProductShop\Asp-FirstLesson\obj\Debug\Asp-FirstLesson.csproj.CopyComplete
 C:\Users\СикировТ\Desktop\AspNet-ProductShop\Asp-FirstLesson\obj\Debug\Asp-FirstLesson.dll
 C:\Users\СикировТ\Desktop\AspNet-ProductShop\Asp-FirstLesson\obj\Debug\Asp-FirstLesson.pdb
+C:\Users\СикировТ\Desktop\AspNet-ProductShop\Asp-FirstLesson\bin\System.Net.Http.Formatting.dll
+C:\Users\СикировТ\Desktop\AspNet-ProductShop\Asp-FirstLesson\bin\System.Web.Http.dll
+C:\Users\СикировТ\Desktop\AspNet-ProductShop\Asp-FirstLesson\bin\System.Web.Http.WebHost.dll
+C:\Users\СикировТ\Desktop\AspNet-ProductShop\Asp-FirstLesson\bin\System.Net.Http.Formatting.xml
+C:\Users\СикировТ\Desktop\AspNet-ProductShop\Asp-FirstLesson\bin\System.Web.Http.xml
+C:\Users\СикировТ\Desktop\AspNet-ProductShop\Asp-FirstLesson\bin\System.Web.Http.WebHost.xml

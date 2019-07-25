@@ -19,5 +19,9 @@ namespace Asp_FirstLesson.ViewModels
         [Required(ErrorMessage = "Обязательное поле")]
         public string Email { get; set; }
         public string SecondPassword { get; set; }
+        [Required]
+        public DateTime BirthDate { get; set; }//ПОДСТАВА
+        [Required]
+        public string Country { get; set; }
     }
 }
