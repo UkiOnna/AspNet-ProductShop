@@ -33,15 +33,21 @@ namespace Asp_FirstLesson.Controllers
                 {
                     return new RedirectResult("/User/Registration");
                 }
-
-                ClaimsIdentity claim = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-                AuthenticationManager.SignOut();
-                AuthenticationManager.SignIn(new AuthenticationProperties
+                if (!UserManager.CheckPassword(user, loginModel.Password))
                 {
-                    IsPersistent = true,
-                }, claim);
+                    return new RedirectResult("/User/Login");
+                }
+                else
+                {
+                    ClaimsIdentity claim = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+                    AuthenticationManager.SignOut();
+                    AuthenticationManager.SignIn(new AuthenticationProperties
+                    {
+                        IsPersistent = true,
+                    }, claim);
 
-                return new RedirectResult("/Home/Index");
+                    return new RedirectResult("/Home/Index");
+                }
             }
             else
             {

@@ -10,7 +10,6 @@ namespace Asp_FirstLesson.Attributes
     {
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            
             return !httpContext.User.Identity.IsAuthenticated;
         }
     }

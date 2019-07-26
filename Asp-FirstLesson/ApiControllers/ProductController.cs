@@ -10,32 +10,33 @@ using System.Web.Http;
 
 namespace Asp_FirstLesson.ApiControllers
 {
-    [RoutePrefix("api/Product")]
     public class ProductController : ApiController
     {
-        private readonly IRepository<Product> ProductRepository=new ProductRepository();
+        private readonly IRepository<Product> ProductRepository = new ProductRepository();
 
-        [Route("GetAllItems")]
-        public IHttpActionResult GetAllItems()
+        [HttpGet]
+        public IHttpActionResult Get()
         {
-            return Json(ProductRepository.GetAll().ToList());
+            return Ok(ProductRepository.GetAll().ToList());
         }
-        [Route("Delete")]
+
+        [HttpDelete]
         public void Delete(int id)
         {
             ProductRepository.Delete(id);
         }
-        [Route("Add")]
-        public void Add(Product product)
+
+        [HttpPost]
+        public void Add([FromBody]Product product)
         {
             ProductRepository.Add(product);
         }
-        [Route("Edit")]
-        public void Edit(Product item)
+        [HttpPut]
+        public void Edit([FromBody]Product item)
         {
             ProductRepository.Edit(item);
         }
-        [Route("GetItem")]
+
         public IHttpActionResult GetItem(int id)
         {
             return Json(ProductRepository.GetItem(id));

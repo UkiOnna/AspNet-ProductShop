@@ -7,25 +7,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form action="~/AdminPanel/EditUser" method="post">
-    <input value="@Model.UserName" placeholder="Название" name="UserName" />
-    <input value="@Model.Email" placeholder="Почта" name="Email" />
-    <span>РОль:</span>
-    <select name="RoleId">
-        @foreach (var role in ViewBag.Roles)
-        {
-            if (Model.RoleId == role.Id)
+    <form action="~/AdminPanel/EditUser" method="post">
+        <input value="@Model.UserName" placeholder="Название" name="UserName" />
+        <input value="@Model.Email" placeholder="Почта" name="Email" />
+        <input value="@Model.Country" placeholder="Страна" name="Country" />
+        <input value="@Model.BirthDate.ToString("yyyy-MM-dd")" name="BirthDate" type="date" placeholder="Дата Рождения">
+        <span>РОль:</span>
+        <select name="RoleId">
+            @foreach (var role in ViewBag.Roles)
             {
-                <option selected="selected" value="@role.Id">@role.Name</option>
+                if (Model.RoleId == role.Id)
+                {
+                    <option selected="selected" value="@role.Id">@role.Name</option>
+                }
+                else
+                {
+                    <option value="@role.Id">@role.Name</option>
+                }
             }
-            else
-            {
-                <option value="@role.Id">@role.Name</option>
-            }
-        }
-    </select>
-    <input hidden name="Id" value="@Model.Id" />
-    <button type="submit">Редактировать!</button>
-</form>
+        </select>
+        <input hidden name="Id" value="@Model.Id" />
+        <button type="submit">Редактировать!</button>
+    </form>
 
 

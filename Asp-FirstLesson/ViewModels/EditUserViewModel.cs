@@ -19,6 +19,10 @@ namespace Asp_FirstLesson.ViewModels
         [Required(ErrorMessage = "Обязательное поле")]
         public string Email { get; set; }
         public string RoleId { get; set; }
+        [Required]
+        public DateTime BirthDate { get; set; }//ПОДСТАВА
+        [Required]
+        public string Country { get; set; }
 
         public EditUserViewModel()
         {
@@ -31,6 +35,8 @@ namespace Asp_FirstLesson.ViewModels
             UserName = user.UserName;
             RoleId = user.Roles.First().RoleId;
             Email = user.Email;
+            BirthDate = user.BirthDate;
+            Country = user.Country;
         }
 
     }
