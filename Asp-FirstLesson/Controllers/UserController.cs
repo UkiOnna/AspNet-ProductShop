@@ -40,6 +40,8 @@ namespace Asp_FirstLesson.Controllers
                 else
                 {
                     ClaimsIdentity claim = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+                    claim.AddClaim(new Claim(ClaimTypes.DateOfBirth, user.BirthDate.ToString()));
+                    claim.AddClaim(new Claim(ClaimTypes.Country, user.Country));
                     AuthenticationManager.SignOut();
                     AuthenticationManager.SignIn(new AuthenticationProperties
                     {
@@ -109,6 +111,22 @@ namespace Asp_FirstLesson.Controllers
             ViewBag.User = UserManager.Users.FirstOrDefault(user => user.UserName == User.Identity.Name);
             var roles = UserManager.GetRoles(User.Identity.GetUserId());
             ViewBag.Role = roles.First();
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult GetClaimInformation()
+        {
+            var claimIdentity = HttpContext.User.Identity as ClaimsIdentity;
+            ViewBag.BirthDate = claimIdentity.Claims.Where(c => c.Type == ClaimTypes.DateOfBirth).Select(c => c.Value).SingleOrDefault();
+            ViewBag.Country = claimIdentity.Claims.Where(c => c.Type == ClaimTypes.Country).Select(c => c.Value).SingleOrDefault();
+            return View();
+        }
+
+        [HttpGet]
+        [Adult(Age =18)]
+        public ActionResult AdultInformation()
+        {
             return View();
         }
     }

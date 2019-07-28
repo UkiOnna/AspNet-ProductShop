@@ -159,6 +159,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Attributes\Adult.cs" />
     <Compile Include="Attributes\NotAuthorize.cs" />
     <Compile Include="Controllers\AdminPanelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -210,6 +211,8 @@
     <Content Include="Views\AdminPanel\EditUsers.cshtml" />
     <Content Include="Views\AdminPanel\EditUser.cshtml" />
     <Content Include="Views\User\GetInformation.cshtml" />
+    <Content Include="Views\User\GetClaimInformation.cshtml" />
+    <Content Include="Views\User\AdultInformation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

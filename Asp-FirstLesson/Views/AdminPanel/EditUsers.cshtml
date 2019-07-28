@@ -19,7 +19,7 @@
             }
         }
         <span>Мэйл:</span><span>@i.Email</span><br />
-        <span>Дата рождения:</span><span>@i.BirthDate</span><br />
+        <span>Дата рождения:</span><span>@i.BirthDate.ToShortDateString()</span><br />
         <span>Страна:</span><span>@i.Country</span><br />
         <a href="~/AdminPanel/EditUser/@i.Id">Редактировать</a>
     </div>
